@@ -16,9 +16,9 @@
   <h1 id="date"></h1>
   <h2 id="fucking-day"></h2>
 
-  <div class="category">
-    <h4>WORDS OF WISDOM OF THE FUCKING DAY:</h4>
-    <div id="words"></div>
+  <div>
+    <h4>FOOTBALL LEGEND OF THE DAY:</h4>
+    <div id="legend"></div>
   </div>
   <div class="category">
     <h4>EDUCATE YOUR IGNORANT ASS:</h4>
@@ -43,12 +43,57 @@
 
   <script>
     // Data arrays for each section
-    const wordsOfWisdom = [
-      "The most successful people are those who are good at plan B.",
-      "Screw it, just do it.",
-      "You miss 100% of the shots you don't take.",
-      "If it scares you, it might be a good thing to try.",
-      "Make it simple, but significant."
+    const footballLegends = [
+      { name: "Pelé", url: "https://en.wikipedia.org/wiki/Pel%C3%A9" },
+      { name: "Diego Maradona", url: "https://en.wikipedia.org/wiki/Diego_Maradona" },
+      { name: "Lionel Messi", url: "https://en.wikipedia.org/wiki/Lionel_Messi" },
+      { name: "Cristiano Ronaldo", url: "https://en.wikipedia.org/wiki/Cristiano_Ronaldo" },
+      { name: "Zinedine Zidane", url: "https://en.wikipedia.org/wiki/Zinedine_Zidane" },
+      { name: "Johan Cruyff", url: "https://en.wikipedia.org/wiki/Johan_Cruyff" },
+      { name: "George Best", url: "https://en.wikipedia.org/wiki/George_Best" },
+      { name: "Lev Yashin", url: "https://en.wikipedia.org/wiki/Lev_Yashin" },
+      { name: "Franz Beckenbauer", url: "https://en.wikipedia.org/wiki/Franz_Beckenbauer" },
+      { name: "Ronaldo Nazário", url: "https://en.wikipedia.org/wiki/Ronaldo_(Brazilian_footballer)" },
+      { name: "Ronaldinho", url: "https://en.wikipedia.org/wiki/Ronaldinho" },
+      { name: "David Beckham", url: "https://en.wikipedia.org/wiki/David_Beckham" },
+      { name: "Gianluigi Buffon", url: "https://en.wikipedia.org/wiki/Gianluigi_Buffon" },
+      { name: "Roberto Baggio", url: "https://en.wikipedia.org/wiki/Roberto_Baggio" },
+      { name: "Andrés Iniesta", url: "https://en.wikipedia.org/wiki/Andr%C3%A9s_Iniesta" },
+      { name: "Paolo Maldini", url: "https://en.wikipedia.org/wiki/Paolo_Maldini" },
+      { name: "Xavi", url: "https://en.wikipedia.org/wiki/Xavi" },
+      { name: "Alfredo Di Stéfano", url: "https://en.wikipedia.org/wiki/Alfredo_Di_St%C3%A9fano" },
+      { name: "Garrincha", url: "https://en.wikipedia.org/wiki/Garrincha" },
+      { name: "Romário", url: "https://en.wikipedia.org/wiki/Rom%C3%A1rio" },
+      { name: "Marco van Basten", url: "https://en.wikipedia.org/wiki/Marco_van_Basten" },
+      { name: "Thierry Henry", url: "https://en.wikipedia.org/wiki/Thierry_Henry" },
+      { name: "Kaká", url: "https://en.wikipedia.org/wiki/Kak%C3%A1" },
+      { name: "Didier Drogba", url: "https://en.wikipedia.org/wiki/Didier_Drogba" },
+      { name: "Samuel Eto'o", url: "https://en.wikipedia.org/wiki/Samuel_Eto%27o" },
+      { name: "Roberto Carlos", url: "https://en.wikipedia.org/wiki/Roberto_Carlos_(footballer,_born_1973)" },
+      { name: "Luis Suárez", url: "https://en.wikipedia.org/wiki/Luis_Su%C3%A1rez" },
+      { name: "Eric Cantona", url: "https://en.wikipedia.org/wiki/Eric_Cantona" }, // legend & madman
+      { name: "Gary Lineker", url: "https://en.wikipedia.org/wiki/Gary_Lineker" },
+      { name: "Michael Owen", url: "https://en.wikipedia.org/wiki/Michael_Owen" },
+      { name: "Steven Gerrard", url: "https://en.wikipedia.org/wiki/Steven_Gerrard" },
+      { name: "Frank Lampard", url: "https://en.wikipedia.org/wiki/Frank_Lampard" },
+      { name: "Wayne Rooney", url: "https://en.wikipedia.org/wiki/Wayne_Rooney" },
+      { name: "Alan Shearer", url: "https://en.wikipedia.org/wiki/Alan_Shearer" },
+      { name: "Sergio Ramos", url: "https://en.wikipedia.org/wiki/Sergio_Ramos" },
+      { name: "Zlatan Ibrahimović", url: "https://en.wikipedia.org/wiki/Zlatan_Ibrahimovi%C4%87" },
+      { name: "Andriy Shevchenko", url: "https://en.wikipedia.org/wiki/Andriy_Shevchenko" },
+      { name: "Lothar Matthäus", url: "https://en.wikipedia.org/wiki/Lothar_Matth%C3%A4us" },
+      { name: "Ruud Gullit", url: "https://en.wikipedia.org/wiki/Ruud_Gullit" },
+      { name: "Arjen Robben", url: "https://en.wikipedia.org/wiki/Arjen_Robben" },
+      { name: "Clarence Seedorf", url: "https://en.wikipedia.org/wiki/Clarence_Seedorf" },
+      { name: "Fernando Torres", url: "https://en.wikipedia.org/wiki/Fernando_Torres" },
+      { name: "Mario Balotelli", url: "https://en.wikipedia.org/wiki/Mario_Balotelli" }, // legend for chaos
+      { name: "Carles Puyol", url: "https://en.wikipedia.org/wiki/Carles_Puyol" },
+      { name: "Oliver Kahn", url: "https://en.wikipedia.org/wiki/Oliver_Kahn" },
+      { name: "Patrice Evra", url: "https://en.wikipedia.org/wiki/Patrice_Evra" },
+      { name: "Socrates", url: "https://en.wikipedia.org/wiki/S%C3%B3crates" },
+      { name: "Fabio Cannavaro", url: "https://en.wikipedia.org/wiki/Fabio_Cannavaro" },
+      { name: "Carlos Valderrama", url: "https://en.wikipedia.org/wiki/Carlos_Valderrama" }, // the hair!
+      { name: "Harold Schumacher", url: "https://en.wikipedia.org/wiki/Harald_Schumacher" } // "incident" vs. France
     ];
 
     const educate = [
@@ -117,6 +162,10 @@
 
       const v = pickDailyRandom(awesomeVideos, 'video');
       document.getElementById('video').innerHTML = `${v.title} <a href="${v.url}" target="_blank">more&gt;&gt;</a>`;
+
+      const legend = pickDailyRandom(footballLegends, 'legends'); // Football Legends
+      document.getElementById('legend').innerHTML = `<a href="${legend.url}" target="_blank">${legend.name}</a>`;
+      
     });
   </script>
 </body>
