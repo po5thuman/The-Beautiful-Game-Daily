@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Fucking Homepage Demo</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; background:#eee; color:#222; }
+    h1 { font-size:2rem; margin-top:2rem; margin-bottom:0; }
+    h2 { font-size:1.5rem; margin:0.5rem 0 1rem 0; }
+    h4 { margin-top:2rem; }
+    .category { margin-bottom:1.5rem; }
+    #date { margin-top:2rem; }
+  </style>
+</head>
+<body>
+  <h1 id="date"></h1>
+  <h2 id="fucking-day"></h2>
+
+  <div class="category">
+    <h4>WORDS OF WISDOM OF THE FUCKING DAY:</h4>
+    <div id="words"></div>
+  </div>
+  <div class="category">
+    <h4>EDUCATE YOUR IGNORANT ASS:</h4>
+    <div id="educate"></div>
+  </div>
+  <div class="category">
+    <h4>FUCKING MIND-BLOWING BOOK OF THE DAY:</h4>
+    <div id="book"></div>
+  </div>
+  <div class="category">
+    <h4>USEFUL SHIT OF THE GODDAMN DAY:</h4>
+    <div id="useful"></div>
+  </div>
+  <div class="category">
+    <h4>WEBSITE OF THE FUCKING DAY:</h4>
+    <div id="website"></div>
+  </div>
+  <div class="category">
+    <h4>AWESOME-AS-SHIT VIDEO OF THE DAY:</h4>
+    <div id="video"></div>
+  </div>
+
+  <script>
+    // Data arrays for each section
+    const wordsOfWisdom = [
+      "The most successful people are those who are good at plan B.",
+      "Screw it, just do it.",
+      "You miss 100% of the shots you don't take.",
+      "If it scares you, it might be a good thing to try.",
+      "Make it simple, but significant."
+    ];
+
+    const educate = [
+      { title: "How to enjoy shit.", url: "https://www.wikihow.com/Enjoy-Life" },
+      { title: "How the Internet Works", url: "https://web.dev/how-does-the-internet-work/" },
+      { title: "Why is the sky blue?", url: "https://spaceplace.nasa.gov/blue-sky/en/" }
+    ];
+
+    const mindBlowingBooks = [
+      { title: "A Beginner’s Guide to Oil Painting.", url: "https://www.goodreads.com/book/show/271656.A_Beginner_s_Guide_To_Oil_Painting" },
+      { title: "The Subtle Art of Not Giving a F*ck", url: "https://amzn.to/fuck-book" },
+      { title: "Sapiens: A Brief History of Humankind", url: "https://amzn.to/2ybXbF8" }
+    ];
+
+    const usefulShit = [
+      { title: "A Fucking Workspace.", url: "https://amazon.com/workspace" },
+      { title: "Cable Organizer", url: "https://amazon.com/cable-org" },
+      { title: "Noise-Cancelling Headphones", url: "https://amazon.com/noise-cancelling" }
+    ];
+
+    const websites = [
+      { title: "Search real content by real motherfuckers.", url: "https://are.na" },
+      { title: "The Useless Web", url: "https://theuselessweb.com" },
+      { title: "Little Alchemy 2", url: "https://littlealchemy2.com" }
+    ];
+
+    const awesomeVideos = [
+      { title: "A brief-ass history of coffee.", url: "https://www.youtube.com/watch?v=4EoIxtuJVKc" },
+      { title: "Kurzgesagt: Wormholes Explained", url: "https://youtu.be/e-P5IFTqB98" },
+      { title: "Primitive Technology: Tiled Roof Hut", url: "https://www.youtube.com/watch?v=47M5dNBvuzg" }
+    ];
+
+    function pickDailyRandom(arr, category) {
+      const today = new Date();
+      const dateStr = today.getFullYear() + String(today.getMonth()+1).padStart(2, '0') + String(today.getDate()).padStart(2, '0');
+      let hash = 0;
+      const seed = category + dateStr;
+      for (let i = 0; i < seed.length; i++) {
+        hash = (hash << 5) - hash + seed.charCodeAt(i);
+        hash |= 0;
+      }
+      const idx = Math.abs(hash) % arr.length;
+      return arr[idx];
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      // Date and Day
+      const today = new Date();
+      const days = ["SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"];
+      document.getElementById("date").textContent =
+        today.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      document.getElementById("fucking-day").textContent = `IT'S FUCKING ${days[today.getDay()]}.`;
+
+      document.getElementById('words').textContent = pickDailyRandom(wordsOfWisdom, 'words');
+      const e = pickDailyRandom(educate, 'educate');
+      document.getElementById('educate').innerHTML = `${e.title} <a href="${e.url}" target="_blank">more&gt;&gt;</a>`;
+
+      const b = pickDailyRandom(mindBlowingBooks, 'book');
+      document.getElementById('book').innerHTML = `${b.title} <a href="${b.url}" target="_blank">more&gt;&gt;</a>`;
+
+      const u = pickDailyRandom(usefulShit, 'useful');
+      document.getElementById('useful').innerHTML = `${u.title} <a href="${u.url}" target="_blank">more&gt;&gt;</a>`;
+
+      const w = pickDailyRandom(websites, 'website');
+      document.getElementById('website').innerHTML = `${w.title} <a href="${w.url}" target="_blank">more&gt;&gt;</a>`;
+
+      const v = pickDailyRandom(awesomeVideos, 'video');
+      document.getElementById('video').innerHTML = `${v.title} <a href="${v.url}" target="_blank">more&gt;&gt;</a>`;
+    });
+  </script>
+</body>
+</html>
