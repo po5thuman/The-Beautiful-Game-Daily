@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>The Beautiful Game Daily</title>
+  <title>Football Fucking Homepage</title>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
   <style>
@@ -90,10 +90,17 @@
       padding: 0;
       display: block;
     }
-    .bottom-nav {
-      text-align: center;
-      margin-bottom: 1.5rem;
-      margin-top: 3rem;
+    .bottom-row {
+      display: flex;
+      gap: 2.2rem;
+      max-width: 1200px;
+      margin: 2.2rem auto 2.5rem auto;
+      align-items: stretch;
+      justify-content: center;
+    }
+    .bottom-row .card {
+      flex: 1 1 0px;
+      min-width: 260px;
     }
     .card {
       background: #fff;
@@ -215,7 +222,7 @@
     .day-link:hover { background: #aed7bc; }
     .today-label { color:#bbb; font-size: 0.97em; }
     @media (max-width: 930px) {
-      .top-row { flex-direction: column; gap: 1.3rem;}
+      .top-row, .bottom-row { flex-direction: column; gap: 1.3rem;}
       .mid-row { max-width:95vw;}
       .card { padding: 1.3rem 1em 1.4rem 1em;}
     }
@@ -223,6 +230,14 @@
       .card-title { font-size: 1.03em;}
       .hero-date { font-size:1.4rem;}
       .hero-section { padding: 5vw 0 6vw 0;}
+    }
+    .bottom-row {
+      display: flex;
+      gap: 2.2rem;
+      max-width: 1200px;
+      margin: 2.2rem auto 2.5rem auto;
+      align-items: stretch;
+      justify-content: center;
     }
   </style>
 </head>
@@ -264,6 +279,26 @@
       <div class="trivia-answer" id="triviaA"></div>
     </div>
   </div>
+  <div class="bottom-row">
+    <div class="card">
+      <div class="card-label gold">Life-Changing Gear</div>
+      <div class="card-title" id="gear-title"></div>
+      <div class="card-desc" id="gear-desc"></div>
+      <a id="gear-link" class="card-link" target="_blank">Buy on Amazon &gt;&gt;</a>
+    </div>
+    <div class="card">
+      <div class="card-label">You Didn't Know You Need</div>
+      <div class="card-title" id="stuff-title"></div>
+      <div class="card-desc" id="stuff-desc"></div>
+      <a id="stuff-link" class="card-link" target="_blank">Buy on Amazon &gt;&gt;</a>
+    </div>
+    <div class="card">
+      <div class="card-label gold">Fan Gear</div>
+      <div class="card-title" id="fan-title"></div>
+      <div class="card-desc" id="fan-desc"></div>
+      <a id="fan-link" class="card-link" target="_blank">Buy on Amazon &gt;&gt;</a>
+    </div>
+  </div>
   <div class="bottom-nav" id="dayNav"></div>
   <script>
     function getDayOffset() {
@@ -302,20 +337,23 @@
       const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
       // Fetch JSON data from root directory
-      const [legends, stadiums, trivia] = await Promise.all([
+      const [legends, stadiums, trivia, links] = await Promise.all([
         loadData('legends.json'),
         loadData('stadiums.json'),
-        loadData('trivia.json')
+        loadData('trivia.json'),
+        loadData('links.json')
       ]).catch(e=>{
         alert("Error loading data: " + e.message);
-        return [[],[],[]]; // fallback
+        return [[],[],[],[]]; // fallback
       });
 
-      // HERO: Show today's date, weekday, and a "score" (here: trivia or legend name for demo)
+      // HERO: Show today's date, weekday, and a "score" (here: legend name + stadium name for demo)
       document.getElementById("date").textContent =
         thisDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
       document.getElementById("day").textContent = `It’s ${days[thisDate.getDay()]}.`;
-      // Demo: for score, show legend name and stadium (or create a "scores.json" separately and fetch that!)
+
+      // For score: (use links or trivia for actual score-of-the-day)
+      // For demo, legend + stadium
       let scoreHighlight =
         `${pickDailyRandom(legends, 'legend', thisDate)?.name || ''} at ${pickDailyRandom(stadiums, 'stadium', thisDate)?.name || ''}`;
       document.getElementById("score").textContent = scoreHighlight;
@@ -349,6 +387,26 @@
         document.getElementById('triviaA').style.display = "block";
         document.getElementById('showTrivia').disabled = true;
       };
+
+      // Bottom gear/affiliate cards (fetch from links.json) ----
+      // links.json should have .gear, .stuff, .fan arrays (see template below)
+      const gearObj = pickDailyRandom(links.gear || [], 'gear', thisDate);
+      document.getElementById('gear-title').textContent = gearObj ? gearObj.title : "(add more gear!)";
+      document.getElementById('gear-desc').textContent = gearObj ? gearObj.desc : "";
+      document.getElementById('gear-link').style.display = gearObj && gearObj.url ? "inline-block" : "none";
+      if (gearObj && gearObj.url) document.getElementById('gear-link').href = gearObj.url;
+
+      const stuffObj = pickDailyRandom(links.stuff || [], 'stuff', thisDate);
+      document.getElementById('stuff-title').textContent = stuffObj ? stuffObj.title : "(add more stuff!)";
+      document.getElementById('stuff-desc').textContent = stuffObj ? stuffObj.desc : "";
+      document.getElementById('stuff-link').style.display = stuffObj && stuffObj.url ? "inline-block" : "none";
+      if (stuffObj && stuffObj.url) document.getElementById('stuff-link').href = stuffObj.url;
+
+      const fanObj = pickDailyRandom(links.fan || [], 'fan', thisDate);
+      document.getElementById('fan-title').textContent = fanObj ? fanObj.title : "(add more fan gear!)";
+      document.getElementById('fan-desc').textContent = fanObj ? fanObj.desc : "";
+      document.getElementById('fan-link').style.display = fanObj && fanObj.url ? "inline-block" : "none";
+      if (fanObj && fanObj.url) document.getElementById('fan-link').href = fanObj.url;
 
       // Bottom navigation links
       let navHtml = '';
