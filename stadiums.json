@@ -1,16 +1,219 @@
 [
   {
     "name": "Camp Nou (Barcelona)",
-    "url": "https://en.wikipedia.org/wiki/Camp_Nou",
-    "desc": "Europe's largest stadium, home of epic nights in football history.",
+    "url": "https://stadiumdb.com/stadiums/esp/camp_nou",
+    "desc": "Europe's largest stadium, home of FC Barcelona and countless dramatic matches.",
     "info": "Capacity 99,354",
     "image": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Camp_Nou_view.jpg"
   },
   {
     "name": "Wembley Stadium (London)",
-    "url": "https://en.wikipedia.org/wiki/Wembley_Stadium",
-    "desc": "The venue of finals, dreams, and heartbreak in England.",
+    "url": "https://stadiumdb.com/stadiums/eng/wembley_stadium",
+    "desc": "The center of English football tradition and monumental finals.",
     "info": "Capacity 90,000",
     "image": "https://upload.wikimedia.org/wikipedia/commons/9/91/Wembleystadium-2007.jpg"
+  },
+  {
+    "name": "Santiago Bernabéu (Madrid)",
+    "url": "https://stadiumdb.com/stadiums/esp/santiago_bernabeu",
+    "desc": "Real Madrid’s iconic fortress in the heart of the Spanish capital.",
+    "info": "Capacity 81,044",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Santiago_Bernabeu_aerial_%282%29.jpg"
+  },
+  {
+    "name": "Maracanã (Rio de Janeiro)",
+    "url": "https://stadiumdb.com/stadiums/bra/maracana",
+    "desc": "Brazil’s football temple, host to World Cup and legendary finals.",
+    "info": "Capacity 78,838",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Maracan%C3%A3_Stadium_in_Rio_de_Janeiro%2C_Brazil.jpg"
+  },
+  {
+    "name": "San Siro (Milan)",
+    "url": "https://stadiumdb.com/stadiums/ita/stadio_giuseppe_meazza",
+    "desc": "Shared by AC Milan and Inter, roaring with passion every derby.",
+    "info": "Capacity 75,923",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Sansirostadium-milano-web.jpg"
+  },
+  {
+    "name": "Signal Iduna Park (Dortmund)",
+    "url": "https://stadiumdb.com/stadiums/ger/signal_iduna_park",
+    "desc": "Germany’s famous Yellow Wall and an electrifying atmosphere.",
+    "info": "Capacity 81,365",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/02/SIGNAL_IDUNA_PARK_Stadium.jpg"
+  },
+  {
+    "name": "Old Trafford (Manchester)",
+    "url": "https://stadiumdb.com/stadiums/eng/old_trafford",
+    "desc": "Home to Manchester United, stands for English football greatness.",
+    "info": "Capacity 74,140",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Old_Trafford_inside_20060726_1.jpg"
+  },
+  {
+    "name": "Allianz Arena (Munich)",
+    "url": "https://stadiumdb.com/stadiums/ger/allianz_arena",
+    "desc": "Striking with its luminous facade, home to Bayern Munich.",
+    "info": "Capacity 75,024",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Allianz_Arena_2013.jpg"
+  },
+  {
+    "name": "Anfield (Liverpool)",
+    "url": "https://stadiumdb.com/stadiums/eng/anfield",
+    "desc": "‘You’ll Never Walk Alone’ echoes on European nights.",
+    "info": "Capacity 54,074",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/9/93/Anfield_Stadium_-_geograph.org.uk_-_3963404.jpg"
+  },
+  {
+    "name": "Stade de France (Paris)",
+    "url": "https://stadiumdb.com/stadiums/fra/stade_de_france",
+    "desc": "France’s grand stage for international triumph and celebration.",
+    "info": "Capacity 81,338",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Stade_de_France_12.jpg"
+  },
+  {
+    "name": "Estádio da Luz (Lisbon)",
+    "url": "https://stadiumdb.com/stadiums/por/estadio_da_luz_benfica",
+    "desc": "Home of Benfica, the ‘Stadium of Light’ shines in Portugal.",
+    "info": "Capacity 64,642",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Estadio_da_Luz_Antonio_Ferreira_Fernandes_2014.jpg"
+  },
+  {
+    "name": "Metropolitano (Madrid)",
+    "url": "https://stadiumdb.com/stadiums/esp/wanda_metropolitano",
+    "desc": "Atletico Madrid’s state-of-the-art red and white cauldron.",
+    "info": "Capacity 68,456",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/59/Wanda_Metropolitano_2018.jpg"
+  },
+  {
+    "name": "Stadio Olimpico (Rome)",
+    "url": "https://stadiumdb.com/stadiums/ita/stadio_olimpico_rome",
+    "desc": "Historic ground and stage for Lazio, Roma, and Italy.",
+    "info": "Capacity 70,634",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/76/Stadio_Olimpico_exterior.jpg"
+  },
+  {
+    "name": "Estádio do Dragão (Porto)",
+    "url": "https://stadiumdb.com/stadiums/por/estadio_do_dragao",
+    "desc": "Fortress of FC Porto, blue passion roars here.",
+    "info": "Capacity 50,033",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/49/Estadio_do_Dragao_2019.jpg"
+  },
+  {
+    "name": "La Bombonera (Buenos Aires)",
+    "url": "https://stadiumdb.com/stadiums/arg/la_bombonera",
+    "desc": "The blue-and-yellow heart of Boca Juniors and Argentinian football.",
+    "info": "Capacity 54,000",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/2b/La_Bombonera_Boca_Juniors_Panoramio.jpg"
+  },
+  {
+    "name": "Azteca Stadium (Mexico City)",
+    "url": "https://stadiumdb.com/stadiums/mex/estadio_azteca",
+    "desc": "Legendary Mexican stadium, site of 'Hand of God' and World Cup glory.",
+    "info": "Capacity 87,523",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/9/99/Estadio_Azteca_2018.jpg"
+  },
+  {
+    "name": "St. James' Park (Newcastle)",
+    "url": "https://stadiumdb.com/stadiums/eng/st_james_park",
+    "desc": "Northern fortress with electric Toon Army spirit.",
+    "info": "Capacity 52,305",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/d6/StJamesParkPanorama.jpg"
+  },
+  {
+    "name": "Celtic Park (Glasgow)",
+    "url": "https://stadiumdb.com/stadiums/sco/celtic_park",
+    "desc": "The home of the Hoops. ‘Paradise’ for Celtic FC faithful.",
+    "info": "Capacity 60,411",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/03/Celtic_Park_Panorama.jpg"
+  },
+  {
+    "name": "Emirates Stadium (London)",
+    "url": "https://stadiumdb.com/stadiums/eng/emirates_stadium",
+    "desc": "Arsenal’s modern home in North London.",
+    "info": "Capacity 60,704",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/8/81/Emirates_Stadium_%28cropped%29.jpg"
+  },
+  {
+    "name": "Tottenham Hotspur Stadium (London)",
+    "url": "https://stadiumdb.com/stadiums/eng/tottenham_hotspur_stadium",
+    "desc": "Spurs digital-age fortress, built to host world football and NFL.",
+    "info": "Capacity 62,850",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Tottenham_Hotspur_Stadium_March_2019.jpg"
+  },
+  {
+    "name": "Parc des Princes (Paris)",
+    "url": "https://stadiumdb.com/stadiums/fra/parc_des_princes",
+    "desc": "Paris Saint-Germain’s playground and capital venue.",
+    "info": "Capacity 47,929",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/40/Parc_des_Princes_2010.jpg"
+  },
+  {
+    "name": "Estadio Monumental (Buenos Aires)",
+    "url": "https://stadiumdb.com/stadiums/arg/estadio_monumental",
+    "desc": "River Plate’s historic home and Argentina’s biggest stadium.",
+    "info": "Capacity 83,214",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Estadio_Monumental_2023.jpg"
+  },
+  {
+    "name": "Itaipava Arena Fonte Nova (Salvador)",
+    "url": "https://stadiumdb.com/stadiums/bra/itaipava_arena_fonte_nova",
+    "desc": "Brazil’s Bahia decorated venue, rebuilt for World Cup 2014.",
+    "info": "Capacity 48,000",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/33/Arena_Fonte_Nova_Salvador_Brasil.jpg"
+  },
+  {
+    "name": "Friends Arena (Stockholm)",
+    "url": "https://stadiumdb.com/stadiums/swe/friends_arena",
+    "desc": "Sweden’s national stadium. Modern, multi-purpose and massive.",
+    "info": "Capacity 50,653",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Friends_Arena_interior_20130727.jpg"
+  },
+  {
+    "name": "Amsterdam ArenA (Johan Cruyff Arena)",
+    "url": "https://stadiumdb.com/stadiums/ned/johan_cruijff_arena",
+    "desc": "Ajax’s home, named after the Dutch legend himself.",
+    "info": "Capacity 55,865",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/28/Johan_Cruijff_Arena_Panorama_2018.jpg"
+  },
+  {
+    "name": "Estádio Mineirão (Belo Horizonte)",
+    "url": "https://stadiumdb.com/stadiums/bra/estadio_governador_magalhaes_pinto",
+    "desc": "Historic Brazilian stadium; hosted World Cup heartbreak and elation.",
+    "info": "Capacity 61,846",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Mineirao_2017.jpg"
+  },
+  {
+    "name": "King Fahd International Stadium (Riyadh)",
+    "url": "https://stadiumdb.com/stadiums/ksa/king_fahd_international_stadium",
+    "desc": "Spectacular tent-roofed jewel in the Saudi desert.",
+    "info": "Capacity 68,752",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/6f/King_Fahd_International_Stadium_interior.jpg"
+  },
+  {
+    "name": "Estadio Centenario (Montevideo)",
+    "url": "https://stadiumdb.com/stadiums/uru/estadio_centenario",
+    "desc": "The original World Cup final stadium (1930), South America's shrine.",
+    "info": "Capacity 60,235",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/8/88/Estadio_Centenario_Montevideo.jpg"
+  },
+  {
+    "name": "Estadio Nacional Mane Garrincha (Brasilia)",
+    "url": "https://stadiumdb.com/stadiums/bra/estadio_nacional_de_brasilia_mane_garrincha",
+    "desc": "Brazil's modernist gem with unique colonnade design.",
+    "info": "Capacity 72,788",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/71/Est%C3%A1dio_Nacional_de_Bras%C3%ADlia_Man%C3%A9_Garrincha_-_panoramio_%282%29.jpg"
+  },
+  {
+    "name": "Croke Park (Dublin)",
+    "url": "https://stadiumdb.com/stadiums/irl/croke_park",
+    "desc": "Ireland's spiritual home for GAA and football.",
+    "info": "Capacity 82,300",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/52/Bernabeu_2012_06.jpg"
+  },
+  {
+    "name": "Luzhniki Stadium (Moscow)",
+    "url": "https://stadiumdb.com/stadiums/rus/luzhniki_stadium",
+    "desc": "Hosts major Russian and European finals, renovated for World Cup 2018.",
+    "info": "Capacity 81,000",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Luzhniki_stadium_Moscow_3.jpg"
   }
 ]
