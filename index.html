@@ -36,17 +36,6 @@
       display: flex;
       align-items: center;
     }
-    .day-nav {
-      margin: 1.8rem auto 1.1rem auto;
-      max-width: 900px;
-      text-align: center;
-    }
-    .day-link {
-      display: inline-block; margin:0 19px; background: #e4f8e9; border-radius: 6px;
-      padding: 9px 18px; text-decoration: none; color: #108f46; font-family: 'Montserrat', sans-serif; font-weight:600; border: 1.5px solid #108f46; font-size: 1.1em; transition: background 0.15s;
-    }
-    .day-link:hover { background: #aed7bc; }
-    .today-label { color:#bbb; font-size: 0.97em; }
     .hero-section {
       background: linear-gradient(92deg, #149647 85%, #198a47 100%);
       color: #fff;
@@ -101,17 +90,10 @@
       padding: 0;
       display: block;
     }
-    .bottom-row {
-      display: flex;
-      gap: 2.2rem;
-      max-width: 1200px;
-      margin: 2.2rem auto 2.5rem auto;
-      align-items: stretch;
-      justify-content: center;
-    }
-    .bottom-row .card {
-      flex: 1 1 0px;
-      min-width: 260px;
+    .bottom-nav {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      margin-top: 3rem;
     }
     .card {
       background: #fff;
@@ -221,8 +203,19 @@
       font-weight: bold;
       letter-spacing: 0.02em;
     }
+    .bottom-nav {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      margin-top: 3rem;
+    }
+    .day-link {
+      display: inline-block; margin:0 19px; background: #e4f8e9; border-radius: 6px;
+      padding: 9px 18px; text-decoration: none; color: #108f46; font-family: 'Montserrat', sans-serif; font-weight:600; border: 1.5px solid #108f46; font-size: 1.1em; transition: background 0.15s;
+    }
+    .day-link:hover { background: #aed7bc; }
+    .today-label { color:#bbb; font-size: 0.97em; }
     @media (max-width: 930px) {
-      .top-row, .bottom-row { flex-direction: column; gap: 1.3rem;}
+      .top-row { flex-direction: column; gap: 1.3rem;}
       .mid-row { max-width:95vw;}
       .card { padding: 1.3rem 1em 1.4rem 1em;}
     }
@@ -240,7 +233,6 @@
       <svg fill="#fff" width="32" height="32" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#fff"/><circle cx="24" cy="24" r="18" fill="none" stroke="#108f46" stroke-width="2"/><circle cx="24" cy="24" r="7" fill="#108f46" stroke="#175c2f" stroke-width="2"/><path d="M24 17 l-5 -7 M24 17 l5 -7 M24 31 l-5 7 M24 31 l5 7 M17 24 l-7 -5 M17 24 l-7 5 M31 24 l7 -5 M31 24 l7 5" stroke="#108f46" stroke-width="2" fill="none"/></svg>
     </div>
   </header>
-  <div class="day-nav" id="dayNav"></div>
   <section class="hero-section">
     <div class="hero-date" id="date"></div>
     <div class="hero-day" id="day"></div>
@@ -272,26 +264,7 @@
       <div class="trivia-answer" id="triviaA"></div>
     </div>
   </div>
-  <div class="bottom-row">
-    <div class="card">
-      <div class="card-label gold">Life-Changing Gear</div>
-      <div class="card-title" id="gear-title"></div>
-      <div class="card-desc" id="gear-desc"></div>
-      <a id="gear-link" class="card-link" target="_blank">more &gt;&gt;</a>
-    </div>
-    <div class="card">
-      <div class="card-label">You Didn't Know You Need</div>
-      <div class="card-title" id="stuff-title"></div>
-      <div class="card-desc" id="stuff-desc"></div>
-      <a id="stuff-link" class="card-link" target="_blank">more &gt;&gt;</a>
-    </div>
-    <div class="card">
-      <div class="card-label gold">Fan Gear</div>
-      <div class="card-title" id="fan-title"></div>
-      <div class="card-desc" id="fan-desc"></div>
-      <a id="fan-link" class="card-link" target="_blank">more &gt;&gt;</a>
-    </div>
-  </div>
+  <div class="bottom-nav" id="dayNav"></div>
   <script>
     function getDayOffset() {
       const params = new URLSearchParams(location.search);
@@ -305,113 +278,79 @@
       now.setDate(now.getDate() + offset);
       return now;
     }
+    // Utility to fetch JSON data from root folder
+    async function loadData(url) {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error("Failed to fetch " + url);
+      return await response.json();
+    }
     function pickDailyRandom(arr, category, date) {
-      if (arr.length === 0) return null;
+      if (!arr || !arr.length) return null;
       const dateStr = date.getFullYear() + String(date.getMonth()+1).padStart(2, '0') + String(date.getDate()).padStart(2, '0');
       let hash = 0;
       const seed = category + dateStr;
       for (let i = 0; i < seed.length; i++) {
-        hash = (hash << 5) - hash + seed.charCodeAt(i);
-        hash |= 0;
+        hash = (hash << 5) - hash + seed.charCodeAt(i); hash |= 0;
       }
       const idx = Math.abs(hash) % arr.length;
       return arr[idx];
     }
-    // --- Added image data!
-    const scoresOfTheDay = [
-      { date: "5/13", desc: "Aguero's dramatic title-winning goal: Manchester City 3-2 QPR (2012)" },
-      { date: "7/8", desc: "Germany 7-1 Brazil (2014 World Cup Semi-final)" },
-      { date: "5/26", desc: "Liverpool 1-0 Real Madrid (1981 European Cup Final)" },
-      { date: "7/30", desc: "England 4-2 West Germany (1966 World Cup Final)" },
-      { date: "5/17", desc: "Chelsea 4-2 Barcelona (2000 Champions League)" },
-      { date: "11/2", desc: "Tottenham 3-1 Inter Milan (2010 Champions League)" },
-      { date: "3/8", desc: "Barcelona 6-1 Paris SG (2017 Champions League Comeback)" },
-      { date: "5/25", desc: "Manchester United 2-1 Bayern Munich (1999 Champions League Final)" },
-      { date: "6/17", desc: "Romania 3-2 Argentina (1994 World Cup)" }
-    ];
-    const footballLegends = [
-      {
-        name: "Pelé",
-        url: "https://en.wikipedia.org/wiki/Pel%C3%A9",
-        desc: "The king of football. Three World Cups and more than 1000 goals.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/9/97/Pel%C3%A9_1960.jpg"
-      },
-      {
-        name: "Diego Maradona",
-        url: "https://en.wikipedia.org/wiki/Diego_Maradona",
-        desc: "Hand of God, Goal of the Century. Pure magic and madness.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/9/97/Diego_maradona_1986.jpg"
-      },
-      {
-        name: "Lionel Messi",
-        url: "https://en.wikipedia.org/wiki/Lionel_Messi",
-        desc: "Smallest GOAT, master magician, World and Ballon d'Or winner.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/8/87/Lionel_Messi_20180626.jpg"
-      },
-      {
-        name: "Cristiano Ronaldo",
-        url: "https://en.wikipedia.org/wiki/Cristiano_Ronaldo",
-        desc: "Machine of goals, athletic beast, winner everywhere.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg"
-      },
-      {
-        name: "Johan Cruyff",
-        url: "https://en.wikipedia.org/wiki/Johan_Cruyff",
-        desc: "Total Football father, brilliant in style and mind.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Johan_Cruyff_1974c.jpg"
-      }
-    ];
-    const stadiums = [
-      {
-        name: "Camp Nou (Barcelona)",
-        url: "https://en.wikipedia.org/wiki/Camp_Nou",
-        desc: "Europe's largest stadium, home of epic nights in football history.",
-        info: "Capacity 99,354",
-        image: "https://upload.wikimedia.org/wikipedia/commons/a/ad/Camp_Nou_aerial.jpg"
-      },
-      {
-        name: "Wembley Stadium (London)",
-        url: "https://en.wikipedia.org/wiki/Wembley_Stadium",
-        desc: "The venue of finals, dreams, and heartbreak in England.",
-        info: "Capacity 90,000",
-        image: "https://upload.wikimedia.org/wikipedia/commons/9/91/Wembleystadium-2007.jpg"
-      },
-      {
-        name: "Maracanã (Rio de Janeiro)",
-        url: "https://en.wikipedia.org/wiki/Maracan%C3%A3_Stadium",
-        desc: "The soul of Brazilian football, host of unforgettable World Cup moments.",
-        info: "Capacity 78,838",
-        image: "https://upload.wikimedia.org/wikipedia/commons/f/f1/Maracan%C3%A3_Stadium_in_Rio_de_Janeiro%2C_Brazil.jpg"
-      }
-    ];
-    const triviaQuestions = [
-      { q: "Who won the 2010 FIFA World Cup?", a: "Spain" },
-      { q: "Which player is known as 'The Divine Ponytail'?", a: "Roberto Baggio" },
-      { q: "Who scored the 'Hand of God' goal?", a: "Diego Maradona" },
-      { q: "Which club has won the most UEFA Champions League titles?", a: "Real Madrid" }
-    ];
-    const lifeChangingGear = [
-      { title: "Adidas Uniforia Match Ball", desc: "Official match ball for international play. Fly like a pro.", url: "https://www.amazon.com/dp/B07ZQPYJ5Q/?tag=youraffiliatetag" },
-      { title: "Nike Mercurial Superfly 9", desc: "Elite speed boots for dream goals—worn by international stars.", url: "https://www.amazon.com/dp/B0B3TZD66X/?tag=youraffiliatetag" },
-      { title: "SKLZ Agility Ladder", desc: "Essential for lightning footwork and professional drills.", url: "https://www.amazon.com/dp/B000P7PVW8/?tag=youraffiliatetag" }
-    ];
-    const stuffYouDidntKnow = [
-      { title: "Quick-Dry Football Socks", desc: "Zero blisters, max comfort. Never complain about your feet again.", url: "https://www.amazon.com/dp/B013Q158UM/?tag=youraffiliatetag" },
-      { title: "Football Ice Cube Tray", desc: "Celebrate every match with ball-shaped ice. The real MVP of parties.", url: "https://www.amazon.com/dp/B084Z9ZQXM/?tag=youraffiliatetag" },
-      { title: "Portable Pop-Up Soccer Goal", desc: "Score anywhere. Garden, beach, street—it's always game time.", url: "https://www.amazon.com/dp/B00Z8UB6IW/?tag=youraffiliatetag" }
-    ];
-    const fanGear = [
-      { title: "Manchester United Home Jersey", desc: "Wear glory. Official United kit—legend for any fan.", url: "https://www.amazon.com/dp/B0C5G1X8FP/?tag=youraffiliatetag" },
-      { title: "Liverpool FC Scarf", desc: "Walk on with pride. Classic scarf for matchday chills.", url: "https://www.amazon.com/dp/B01LYLC61E/?tag=youraffiliatetag" },
-      { title: "FC Barcelona Cap", desc: "Barça to the bone. Represent on sunny days.", url: "https://www.amazon.com/dp/B01GZZ8SXE/?tag=youraffiliatetag" }
-    ];
 
-    document.addEventListener("DOMContentLoaded", function() {
+    async function startSite() {
       const offset = getDayOffset();
       const thisDate = getDateForOffset(offset);
       const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
-      // Navigation
+      // Fetch JSON data from root directory
+      const [legends, stadiums, trivia] = await Promise.all([
+        loadData('legends.json'),
+        loadData('stadiums.json'),
+        loadData('trivia.json')
+      ]).catch(e=>{
+        alert("Error loading data: " + e.message);
+        return [[],[],[]]; // fallback
+      });
+
+      // HERO: Show today's date, weekday, and a "score" (here: trivia or legend name for demo)
+      document.getElementById("date").textContent =
+        thisDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      document.getElementById("day").textContent = `It’s ${days[thisDate.getDay()]}.`;
+      // Demo: for score, show legend name and stadium (or create a "scores.json" separately and fetch that!)
+      let scoreHighlight =
+        `${pickDailyRandom(legends, 'legend', thisDate)?.name || ''} at ${pickDailyRandom(stadiums, 'stadium', thisDate)?.name || ''}`;
+      document.getElementById("score").textContent = scoreHighlight;
+
+      // Legend card
+      const legend = pickDailyRandom(legends, 'legend', thisDate);
+      document.getElementById('legend-title').textContent = legend ? legend.name : "(add more legends!)";
+      document.getElementById('legend-desc').textContent = legend ? legend.desc : "";
+      document.getElementById('legend-link').style.display = legend && legend.url ? "inline-block" : "none";
+      if (legend && legend.url) document.getElementById('legend-link').href = legend.url;
+      document.getElementById('legend-image').src = legend && legend.image ? legend.image : "";
+      document.getElementById('legend-image').style.display = legend && legend.image ? "block" : "none";
+
+      // Stadium card
+      const stadium = pickDailyRandom(stadiums, 'stadium', thisDate);
+      document.getElementById('stadium-title').textContent = stadium ? stadium.name : "(add more stadiums!)";
+      document.getElementById('stadium-desc').textContent = stadium ? stadium.desc : "";
+      document.getElementById('stadium-link').style.display = stadium && stadium.url ? "inline-block" : "none";
+      if (stadium && stadium.url) document.getElementById('stadium-link').href = stadium.url;
+      document.getElementById('stadium-image').src = stadium && stadium.image ? stadium.image : "";
+      document.getElementById('stadium-image').style.display = stadium && stadium.image ? "block" : "none";
+      document.getElementById('stadium-info').textContent = stadium ? stadium.info : "";
+
+      // Trivia card
+      const triviaObj = pickDailyRandom(trivia, 'trivia', thisDate);
+      document.getElementById('trivia-title').textContent = triviaObj ? triviaObj.q : "(add more trivia!)";
+      document.getElementById('triviaA').textContent = triviaObj ? triviaObj.a : "";
+      document.getElementById('triviaA').style.display = "none";
+      document.getElementById('showTrivia').disabled = false;
+      document.getElementById('showTrivia').onclick = () => {
+        document.getElementById('triviaA').style.display = "block";
+        document.getElementById('showTrivia').disabled = true;
+      };
+
+      // Bottom navigation links
       let navHtml = '';
       navHtml += `<a class="day-link" href="?d=${offset-1}">&#8592; Previous Day</a> `;
       if (offset < 0) {
@@ -422,67 +361,8 @@
         navHtml += `<span class="today-label">(Today)</span>`;
       }
       document.getElementById("dayNav").innerHTML = navHtml;
-
-      // Hero Section
-      document.getElementById("date").textContent =
-        thisDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-      document.getElementById("day").textContent = `It’s ${days[thisDate.getDay()]}.`;
-      const dayStr = (thisDate.getMonth()+1) + "/" + thisDate.getDate();
-      let scoreObj = scoresOfTheDay.find(s => s.date === dayStr);
-      if (!scoreObj) scoreObj = pickDailyRandom(scoresOfTheDay, 'score', thisDate);
-      document.getElementById("score").textContent = scoreObj.desc;
-
-      // Legend
-      const legend = pickDailyRandom(footballLegends, 'legend', thisDate);
-      document.getElementById('legend-title').textContent = legend ? legend.name : "(add more legends!)";
-      document.getElementById('legend-desc').textContent = legend ? legend.desc : "";
-      document.getElementById('legend-link').style.display = legend && legend.url ? "inline-block" : "none";
-      if (legend && legend.url) document.getElementById('legend-link').href = legend.url;
-      document.getElementById('legend-image').src = legend && legend.image ? legend.image : "";
-      document.getElementById('legend-image').style.display = legend && legend.image ? "block" : "none";
-
-      // Stadium
-      const stadium = pickDailyRandom(stadiums, 'stadium', thisDate);
-      document.getElementById('stadium-title').textContent = stadium ? stadium.name : "(add more stadiums!)";
-      document.getElementById('stadium-desc').textContent = stadium ? stadium.desc : "";
-      document.getElementById('stadium-link').style.display = stadium && stadium.url ? "inline-block" : "none";
-      if (stadium && stadium.url) document.getElementById('stadium-link').href = stadium.url;
-      document.getElementById('stadium-image').src = stadium && stadium.image ? stadium.image : "";
-      document.getElementById('stadium-image').style.display = stadium && stadium.image ? "block" : "none";
-      document.getElementById('stadium-info').textContent = stadium ? stadium.info : "";
-
-      // Trivia
-      const triviaObj = pickDailyRandom(triviaQuestions, 'trivia', thisDate);
-      document.getElementById('trivia-title').textContent = triviaObj ? triviaObj.q : "(add more trivia!)";
-      document.getElementById('triviaA').textContent = triviaObj ? triviaObj.a : "";
-      document.getElementById('triviaA').style.display = "none";
-      document.getElementById('showTrivia').disabled = false;
-      document.getElementById('showTrivia').onclick = () => {
-        document.getElementById('triviaA').style.display = "block";
-        document.getElementById('showTrivia').disabled = true;
-      };
-
-      // Gear
-      const gear = pickDailyRandom(lifeChangingGear, 'gear', thisDate);
-      document.getElementById('gear-title').textContent = gear ? gear.title : "(add more gear!)";
-      document.getElementById('gear-desc').textContent = gear ? gear.desc : "";
-      document.getElementById('gear-link').style.display = gear && gear.url ? "inline-block" : "none";
-      if (gear && gear.url) document.getElementById('gear-link').href = gear.url;
-
-      // Stuff You Didn't Know
-      const stuff = pickDailyRandom(stuffYouDidntKnow, 'stuff', thisDate);
-      document.getElementById('stuff-title').textContent = stuff ? stuff.title : "(add more stuff!)";
-      document.getElementById('stuff-desc').textContent = stuff ? stuff.desc : "";
-      document.getElementById('stuff-link').style.display = stuff && stuff.url ? "inline-block" : "none";
-      if (stuff && stuff.url) document.getElementById('stuff-link').href = stuff.url;
-
-      // Fan Gear
-      const fan = pickDailyRandom(fanGear, 'fan', thisDate);
-      document.getElementById('fan-title').textContent = fan ? fan.title : "(add more fan gear!)";
-      document.getElementById('fan-desc').textContent = fan ? fan.desc : "";
-      document.getElementById('fan-link').style.display = fan && fan.url ? "inline-block" : "none";
-      if (fan && fan.url) document.getElementById('fan-link').href = fan.url;
-    });
+    }
+    startSite();
   </script>
 </body>
 </html>
