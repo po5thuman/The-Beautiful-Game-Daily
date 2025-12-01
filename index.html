@@ -4,18 +4,19 @@
   <meta charset="UTF-8" />
   <title>The Beautiful Game Daily</title>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <link href="https://fonts.googleapis.com/css2?family=Kedebideri:wght@700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Kedebideri font for site title -->
+  <link href="https://fonts.googleapis.com/css2?family=Kedebideri:wght@700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
-      background: #f6f8f3;
+      background: #f6f8f3 url('https://images.pexels.com/photos/46798/the-ball-stadion-football-the-pitch-46798.jpeg?auto=compress&w=1920&q=80') no-repeat center center fixed;
+      background-size: cover;
       margin: 0;
       font-family: 'Open Sans', Arial, Helvetica, sans-serif;
       color: #212e18;
       min-height: 100vh;
     }
     .site-header {
-      background: #108f46;
+      background: rgba(16,143,70,0.98);
       color: #fff;
       display: flex;
       align-items: center;
@@ -26,9 +27,9 @@
     }
     .site-name {
       font-family: 'Kedebideri', cursive, sans-serif;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       font-weight: 700;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.05em;
       padding-left: 6px;
     }
     .site-ball {
@@ -38,15 +39,16 @@
       align-items: center;
     }
     .hero-section {
-      background: linear-gradient(92deg, #149647 85%, #198a47 100%);
+      background: linear-gradient(92deg, #149647ee 85%, #198a47ee 100%);
       color: #fff;
       text-align: center;
       padding: 44px 0 36px 0;
       margin-bottom: 40px;
       border-bottom: 3px solid #f9be00;
+      box-shadow: 0 7px 40px 0 rgba(17,143,70,0.15);
     }
     .hero-date {
-      font-family: 'Kedebideri', cursive, sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: 2.5rem;
       font-weight: 700;
       letter-spacing: 0.04em;
@@ -55,13 +57,13 @@
     .hero-day {
       font-size: 1.2rem;
       margin-bottom: 0.20em;
-      font-family: 'Kedebideri', cursive, sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-weight: 500;
     }
     .hero-countdown {
       margin-top: 0.25em;
       font-size: 1.28em;
-      font-family: 'Kedebideri', cursive, sans-serif;
+      font-family: 'Montserrat', sans-serif;
       color: #f9be00;
       font-weight:bold;
       letter-spacing:0.01em;
@@ -90,7 +92,7 @@
       min-width: 260px;
     }
     .card {
-      background: #fff;
+      background: rgba(255,255,255,0.96);
       border-radius: 12px;
       box-shadow: 0 3px 16px 0 rgba(40,70,40,0.13);
       padding: 2.1rem 2.2rem 2.2rem 2.2rem;
@@ -99,9 +101,10 @@
       flex-direction: column;
       align-items: flex-start;
       min-width: 0;
+      backdrop-filter: blur(1px);
     }
     .card-label {
-      font-family: 'Kedebideri', cursive, sans-serif;
+      font-family: 'Montserrat', sans-serif;
       background: #108f46;
       color: #fff;
       font-size: 0.92em;
@@ -119,7 +122,7 @@
       color: #140e02;
     }
     .card-title {
-      font-family: 'Kedebideri', cursive, sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: 1.3em;
       font-weight: 700;
       color: #1B5E20;
@@ -154,7 +157,7 @@
     .buy-btn {
       margin-top: 1.5em;
       display: inline-block;
-      font-family: 'Kedebideri', cursive, sans-serif;
+      font-family: 'Montserrat', sans-serif;
       background: #108f46;
       color: #fff;
       font-size: 1.08em;
@@ -196,7 +199,7 @@
       background: #108f46;
       color: #fff;
       border: none;
-      font-family: 'Kedebideri', cursive, sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: 1.03em;
       padding: 9px 21px;
       border-radius: 7px;
@@ -222,7 +225,7 @@
     }
     .day-link {
       display: inline-block; margin:0 19px; background: #e4f8e9; border-radius: 6px;
-      padding: 9px 18px; text-decoration: none; color: #108f46; font-family: 'Kedebideri', cursive, sans-serif; font-weight:600; border: 1.5px solid #108f46; font-size: 1.1em; transition: background 0.15s;
+      padding: 9px 18px; text-decoration: none; color: #108f46; font-family: 'Montserrat', sans-serif; font-weight:600; border: 1.5px solid #108f46; font-size: 1.1em; transition: background 0.15s;
     }
     .day-link:hover { background: #aed7bc; }
     .today-label { color:#bbb; font-size: 0.97em; }
@@ -346,7 +349,7 @@
         thisDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
       document.getElementById("day").textContent = `It’s ${days[thisDate.getDay()]}`;
       document.getElementById("countdown").textContent =
-        `World Cup Kicks Off in ${wcDays} Days`;
+        `World Cup Kick Off in ${wcDays} Days`;
 
       // Fetch JSON data from root directory
       const [legends, stadiums, trivia, links] = await Promise.all([
