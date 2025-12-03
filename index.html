@@ -172,13 +172,6 @@
       letter-spacing: 0.04em;
     }
     .buy-btn:hover, .buy-btn:focus { background: #175c2f; color: #fff;}
-    .card-info {
-      color: #2f8309;
-      font-size: 1.01em;
-      font-weight: 600;
-      margin-top: 0.3em;
-      letter-spacing: 0.01em;
-    }
     .card-image-wrap {
       width: 100%;
       margin-top: 2.2em;
@@ -351,15 +344,17 @@
       document.getElementById("countdown").textContent =
         `World Cup Kicks Off in ${wcDays} Days`;
 
-      // Fetch JSON data from root directory
-      const [legends, stadiums, trivia, links] = await Promise.all([
+      // Load legends, stadiums, trivia and affiliated links (now split!)
+      const [legends, stadiums, trivia, lifechanging, favoritefind, fangear] = await Promise.all([
         loadData('legends.json'),
         loadData('stadiums.json'),
         loadData('trivia.json'),
-        loadData('links.json')
+        loadData('lifechanging_links.json'),
+        loadData('favoritefind_links.json'),
+        loadData('fangear_links.json')
       ]).catch(e=>{
         alert("Error loading data: " + e.message);
-        return [[],[],[],[]];
+        return [[],[],[],[],[],[]];
       });
 
       // Legend card
@@ -370,7 +365,6 @@
       if (legend && legend.url) document.getElementById('legend-link').href = legend.url;
       document.getElementById('legend-image').src = legend && legend.image ? legend.image : "";
       document.getElementById('legend-image').style.display = legend && legend.image ? "block" : "none";
-
       // Stadium card
       const stadium = pickDailyRandom(stadiums, 'stadium', thisDate);
       document.getElementById('stadium-title').textContent = stadium ? stadium.name : "(add more stadiums!)";
@@ -379,7 +373,6 @@
       if (stadium && stadium.url) document.getElementById('stadium-link').href = stadium.url;
       document.getElementById('stadium-image').src = stadium && stadium.image ? stadium.image : "";
       document.getElementById('stadium-image').style.display = stadium && stadium.image ? "block" : "none";
-      // removed capacity/info
 
       // Trivia card
       const triviaObj = pickDailyRandom(trivia, 'trivia', thisDate);
@@ -392,20 +385,20 @@
         document.getElementById('showTrivia').disabled = true;
       };
 
-      // Bottom affiliate cards
-      const gearObj = pickDailyRandom(links.gear || [], 'gear', thisDate);
+      // Bottom affiliate cards (each with its own file now)
+      const gearObj = pickDailyRandom(lifechanging, 'gear', thisDate);
       document.getElementById('gear-title').textContent = gearObj ? gearObj.title : "(add more gear!)";
       document.getElementById('gear-desc').textContent = gearObj ? gearObj.desc : "";
       document.getElementById('gear-link').style.display = gearObj && gearObj.url ? "inline-block" : "none";
       if (gearObj && gearObj.url) document.getElementById('gear-link').href = gearObj.url;
 
-      const stuffObj = pickDailyRandom(links.stuff || [], 'stuff', thisDate);
+      const stuffObj = pickDailyRandom(favoritefind, 'stuff', thisDate);
       document.getElementById('stuff-title').textContent = stuffObj ? stuffObj.title : "(add more stuff!)";
       document.getElementById('stuff-desc').textContent = stuffObj ? stuffObj.desc : "";
       document.getElementById('stuff-link').style.display = stuffObj && stuffObj.url ? "inline-block" : "none";
       if (stuffObj && stuffObj.url) document.getElementById('stuff-link').href = stuffObj.url;
 
-      const fanObj = pickDailyRandom(links.fan || [], 'fan', thisDate);
+      const fanObj = pickDailyRandom(fangear, 'fan', thisDate);
       document.getElementById('fan-title').textContent = fanObj ? fanObj.title : "(add more fan gear!)";
       document.getElementById('fan-desc').textContent = fanObj ? fanObj.desc : "";
       document.getElementById('fan-link').style.display = fanObj && fanObj.url ? "inline-block" : "none";
@@ -413,10 +406,10 @@
 
       // Bottom navigation links
       let navHtml = '';
-      navHtml += `<a class="day-link" href="?d=${offset-1}">&#8592; Previous Day</a> `;
+      navHtml += `<a class="day-link" href="?d=${offset-1}">&#8592; Previous Day</a>` ;
       if (offset < 0) {
         if (offset == -1) navHtml += `<span class="today-label">(Yesterday)</span>`;
-        navHtml += `<a class="day-link" href="${location.pathname}">Today</a> `;
+        navHtml += `<a class="day-link" href="${location.pathname}">Today</a>` ;
         navHtml += `<a class="day-link" href="?d=${offset+1}">Next Day &#8594;</a>`;
       } else {
         navHtml += `<span class="today-label">(Today)</span>`;
